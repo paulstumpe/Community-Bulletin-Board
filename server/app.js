@@ -39,14 +39,6 @@ MongoDB.connectDB(async (err) => {
         throw e
     }
 
-    const desired = false
-    if (desired) {
-        // Use disconnectDB for clean driver disconnect
-        MongoDB.disconnectDB()
-        process.exit(0)
-    }
-    // Server code anywhere above here inside connectDB()
-    
     const express = require('express');
     const bodyParser = require('body-parser')
     const path = require('path');
@@ -66,6 +58,9 @@ MongoDB.connectDB(async (err) => {
     });
 
     app.listen(process.env.PORT || 8080);
+    // Server code anywhere above here inside connectDB()
+    
+
 
 })
 
