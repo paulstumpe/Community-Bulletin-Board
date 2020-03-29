@@ -11,15 +11,44 @@ const App = () => {
   //array of all posts from server
   const [allPosts, setAllPosts] = useState([])
   //string representing selected sorting mechanism
+  const [allTags, setAllTags] = useState([])
   const [sortedBy, setSortedBy] = useState('')
   //string representing selected tag filter
   const [filterBy, setFilterBy] = useState('')
+  useEffect(()=>{
+    const posts = [
+      {
+        tags: ['Help', 'ComputerStuff'],
+        body: "This is my body",
+        title: 'Post 1',
+        dateCreated: ''
+      },
+      {
+        tags: ['Help', 'what'],
+        body: "This is my body",
+        title: 'Post 2',
+        dateCreated: ''
+      }
+    ]
+    const tags = [];
+    posts.forEach((post)=>{
+      post.tags.forEach(tag=>{
+        if(!tags.includes(tag)){
+          tags.push(tag);
+        }
+      })
+    })
+    setAllPosts(posts);
+    setAllTags(tags);
+
+  }, [])
+
   return (
     <Container>
       <div className="App">
-        <TopBar/>
+        <TopBar allTags={allTags} filterBy={filterBy} setFilterBy={setFilterBy}/>
         <CreatePost />
-        <PostList/>
+        <PostList allPosts={allPosts} filterBy={filterBy}/>
       </div>
     </Container>
   )
