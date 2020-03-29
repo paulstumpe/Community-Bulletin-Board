@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {Navbar, Nav, NavDropdown, Container, Form, FormControl, Button} from 'react-bootstrap';
 import CreatePost from './CreatePost';
-const TopBar = ({filterBy, setFilterBy, allTags, sortBy, setSortBy})=>{
+const TopBar = ({filterBy, setFilterBy, allTags, sortBy, setSortBy, refresh})=>{
     
         //  Sorting dropdown
         // Filter dropdown 
@@ -39,7 +39,7 @@ const TopBar = ({filterBy, setFilterBy, allTags, sortBy, setSortBy})=>{
                 ))}
             </NavDropdown>
         </Nav>
-            <CreatePost />
+            <CreatePost refresh={refresh} />
         </Navbar.Collapse>
     </Navbar>
     </div>)

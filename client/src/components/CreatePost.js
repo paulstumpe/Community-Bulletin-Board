@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import {Button, Modal, Form} from 'react-bootstrap'
-const CreatePost = ()=>{
+import {Button, Modal, Form} from 'react-bootstrap';
+import axios from 'axios';
+const CreatePost = ({refresh})=>{
     //top padding ensure no overlap with navbar
     const [show, setShow] = useState(false);
     const [tag, setTag] = useState('');
@@ -25,7 +26,12 @@ const CreatePost = ()=>{
         setTag('');
     };
     const handleSubmit = () =>{
-        //todo add axios request to server
+        axios.post('/createpost', {
+            title,
+            body,
+            tags : (tag.length ? tags.concat(tag) : tags)
+        })
+            .then(refresh)
         handleClose();
     };
     return(<div>

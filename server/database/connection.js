@@ -1,22 +1,63 @@
-const MongoClient = require('mongodb').MongoClient
- const uri = 'mongodb://localhost:27017/myproject'
- let _db;
- let _client;
- const connectDB = async (callback) => {
-     try {
-         MongoClient.connect(uri, (err, client) => {
-            _client = client;
-            const db = client.db('forum')
-             _db = db
-             return callback(err)
-         })
-     } catch (e) {
-         throw e
-     }
- }
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/communityForum', {useNewUrlParser: true,  useUnifiedTopology: true })
+.then(() => console.log('Connected to database'))
+.catch(err => console.error('Failed to connect to database', err));
 
- const getDB = () => _db
+const postSchema = new mongoose.Schema({
+    // TODO: your schema here!
+    title: {
+        type: String,
+        default:''
+    },
+    body: {
+        type: String,
+        default:''
+    },
+    upVotes: {
+        type: Number,
+        default: 1
+    },
+    tags: Array,
+    dateCreated: {
+        type: Date,
+        default : Date.now
+    },
+    dateUpdated:{
+        type: Date,
+        default : Date.now
+    },
+  });
 
- const disconnectDB = () => _client.close()
+const Post = mongoose.model('Post', postSchema);
 
- module.exports = { connectDB, getDB, disconnectDB }
+const savePost = (submittedPost)=>{
+    const post = new Post(submittedPost)
+    return post.save()
+}
+
+const deletePost = ({_id})=>{
+    return Post.deleteOne({_id})
+}
+
+const editPost = (submittedPost)=>{
+    const {_id}=submittedPost
+    //updates date updated serverside for consistency and protection
+    submittedPost.dateUpdated = Date.now()
+    //looks up post by id and rewrites with submittedPost
+    return Post.findOneAndUpdate({_id}, submittedPost)
+}
+
+const getAllPosts = ()=>{
+    return Post.find({})
+}
+
+const upVotePost = (submittedPost)=>{
+    
+}
+
+const downVotePost = (submittedPost)=>{
+
+}
+// savePost({title:'this one has two upvotes', upVotes: 0,body: 'and this  body is super long asl;kdnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnfa see?', tags:["i'm trolling"]})
+getAllPosts()
+module.exports = {savePost, deletePost, editPost, getAllPosts, upVotePost, downVotePost}
