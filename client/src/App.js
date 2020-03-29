@@ -75,7 +75,7 @@ const App = () => {
           sortBy={sortBy} 
           setSortBy={setSortBy}
           refresh={refresh} />
-        <PostList allPosts={allPosts} filterBy={filterBy}/>
+        <PostList allPosts={allPosts} filterBy={filterBy} refresh={refresh}/>
       </div>
     </Container>
   )

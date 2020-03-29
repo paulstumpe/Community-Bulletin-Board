@@ -35,7 +35,7 @@ const savePost = (submittedPost)=>{
     return post.save()
 }
 
-const deletePost = ({_id})=>{
+const deletePost = (_id)=>{
     return Post.deleteOne({_id})
 }
 
@@ -51,12 +51,12 @@ const getAllPosts = ()=>{
     return Post.find({})
 }
 
-const upVotePost = (submittedPost)=>{
-    
+const upVotePost = (_id)=>{
+    return Post.findOneAndUpdate({_id},{$inc:{upVotes: 1}})
 }
 
-const downVotePost = (submittedPost)=>{
-
+const downVotePost = (_id)=>{
+    return Post.findOneAndUpdate({_id},{$inc:{upVotes: -1}})
 }
 // savePost({title:'this one has two upvotes', upVotes: 0,body: 'and this  body is super long asl;kdnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnfa see?', tags:["i'm trolling"]})
 getAllPosts()

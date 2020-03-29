@@ -1,17 +1,25 @@
 Functional Requirements
 
-User can write a bulletin board post
-Post has a title
-Post has a body
-Post can have tags
+[x]User can write a bulletin board post
+[x]Post has a title
+[x]Post has a body
+[x]Post can have tags
 User can edit any posts
-User can delete any posts
-User can view all posts
+[x]User can delete any posts
+[x] User can view all posts
 User can upvote or downvote a post
-User can filter posts by tags
-User can choose to order posts by popularity, title, and date created
+[x]User can filter posts by tags
+[x]User can choose to order posts by popularity, title, and date created
 User should be able to easily use application on a phone, tablet, laptop and desktop
- 
+
+todo:
+1. format dates
+3. edit posts
+4. upvote/downvote post
+5. add feedback spinners ect.
+6. enhance stylings
+7. deploy
+8. refresh function should possibly recollapse accordian, or at least on delete
 
 Technical Requirements
 
