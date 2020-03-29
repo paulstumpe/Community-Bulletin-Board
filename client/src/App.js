@@ -21,7 +21,7 @@ const App = () => {
         tags: ['Help', 'ComputerStuff'],
         body: "This is my body",
         title: 'Post 1',
-        dateCreated: '',
+        dateCreated: 'today',
         upVotes : 1
       },
       {

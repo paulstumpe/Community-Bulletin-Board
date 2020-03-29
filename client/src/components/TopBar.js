@@ -23,7 +23,7 @@ const TopBar = ({filterBy, setFilterBy, allTags, sortBy, setSortBy})=>{
                 active={sortBy==='Alphabetical'}
                 onClick={()=>{setSortBy('Alphabetical')}}>Alphabetical</NavDropdown.Item>
             </NavDropdown>
-            <NavDropdown title="Filter By" id="basic-nav-dropdown">
+            <NavDropdown title={filterBy==='default'? 'Filter By' : filterBy} id="basic-nav-dropdown">
                 <NavDropdown.Item 
                         active={filterBy==='default'}
                         onClick={()=>{setFilterBy('default')}}

@@ -14,14 +14,20 @@ const Post = ({post, i})=>{
     // date
     console.log(post.tags)
     return(
-        <Card>
+        <Card className='text-left'>
             <Accordion.Toggle as={Card.Header} eventKey={i}>
             {post.title}
+            <small style={{float:'right'}} className="text-muted" >{post.dateCreated}</small>
             </Accordion.Toggle>
             <Accordion.Collapse eventKey={i}>
                 <Card>
-                    <Card.Body>{post.body}</Card.Body>
-                    <Card.Footer>Tags: {post.tags.length ? post.tags.join(', ') : 'none'}</Card.Footer>
+                    <Card.Body>
+                        <Card.Text>{post.body}</Card.Text>
+                        
+                        <Card.Text>
+                            <small className='text-muted'>Tags: {post.tags.length ? post.tags.join(', ') : 'none'}</small>
+                        </Card.Text>
+                    </Card.Body>
                 </Card>
             </Accordion.Collapse>
         </Card>
