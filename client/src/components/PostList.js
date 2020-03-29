@@ -4,12 +4,13 @@ import {Accordion,Card} from 'react-bootstrap'
 
 const PostList = ({allPosts, filterBy})=>{
     console.log(allPosts)
-    return(<div>
-        PostList
+    return(<div style={{'paddingTop': '70px'}}>
         <Accordion >
-            {allPosts.map((post, i)=>(
-                    <Post post={post} i={i} key={post.title}/>
-            ))}
+            {allPosts.map((post, i)=>{
+                if(filterBy==='default' || post.tags.includes(filterBy)){
+                    return (<Post post={post} i={i} key={post.title}/>)
+                }
+                })}
         </Accordion>
     </div>)
 }

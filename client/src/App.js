@@ -12,24 +12,34 @@ const App = () => {
   const [allPosts, setAllPosts] = useState([])
   //string representing selected sorting mechanism
   const [allTags, setAllTags] = useState([])
-  const [sortedBy, setSortedBy] = useState('')
+  const [sortBy, setSortBy] = useState('Most Recent')
   //string representing selected tag filter
-  const [filterBy, setFilterBy] = useState('')
+  const [filterBy, setFilterBy] = useState('default')
   useEffect(()=>{
-    const posts = [
+    let posts = [
       {
         tags: ['Help', 'ComputerStuff'],
         body: "This is my body",
         title: 'Post 1',
-        dateCreated: ''
+        dateCreated: '',
+        upVotes : 1
       },
       {
         tags: ['Help', 'what'],
         body: "This is my body",
         title: 'Post 2',
-        dateCreated: ''
+        dateCreated: '',
+        upVotes: 2
       }
     ]
+    if(sortBy === "Most Recent"){
+      
+    } else if (sortBy === "Most Upvoted"){
+      posts = posts.sort((a,b)=>{return b.upVotes - a.upVotes})
+      console.log(posts)
+    } else if (sortBy=== "Alphabetical"){
+
+    }
     const tags = [];
     posts.forEach((post)=>{
       post.tags.forEach(tag=>{
@@ -41,13 +51,16 @@ const App = () => {
     setAllPosts(posts);
     setAllTags(tags);
 
-  }, [])
+  }, [sortBy])
 
   return (
     <Container>
       <div className="App">
-        <TopBar allTags={allTags} filterBy={filterBy} setFilterBy={setFilterBy}/>
-        <CreatePost />
+        <TopBar allTags={allTags} 
+          filterBy={filterBy} 
+          setFilterBy={setFilterBy} 
+          sortBy={sortBy} 
+          setSortBy={setSortBy}/>
         <PostList allPosts={allPosts} filterBy={filterBy}/>
       </div>
     </Container>
