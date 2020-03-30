@@ -27,5 +27,10 @@ api.patch('/downvote/:postId',(req, res)=>{
     downVotePost(req.params.postId)
     .then(()=>res.send('post downVoted'))    
 })
+api.patch('/editpost',(req, res)=>{
+    console.log(req.body)
+    editPost(req.body)
+    .then(()=>res.send('post edited'))    
+})
 
 module.exports = api;

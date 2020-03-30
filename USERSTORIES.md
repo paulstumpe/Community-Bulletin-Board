@@ -7,7 +7,7 @@ Functional Requirements
 User can edit any posts
 [x]User can delete any posts
 [x] User can view all posts
-User can upvote or downvote a post
+[x]User can upvote or downvote a post
 [x]User can filter posts by tags
 [x]User can choose to order posts by popularity, title, and date created
 User should be able to easily use application on a phone, tablet, laptop and desktop

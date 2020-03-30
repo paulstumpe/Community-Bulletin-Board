@@ -43,12 +43,39 @@ const App = () => {
       .then(({data})=>{
         let posts = data;
         if(sortBy === "Most Recent"){
-          
+          posts = posts.sort((a,b)=>{
+            if ( a.dateCreated < b.dateCreated ){
+              return 1;
+            }
+            if ( a.dateCreated > b.dateCreated ){
+              return -1;
+            }
+            return 0;
+          })
+          console.log(posts)
         } else if (sortBy === "Most Upvoted"){
-          posts = posts.sort((a,b)=>{return b.upVotes - a.upVotes})
+          posts = posts.sort((a,b)=>{
+            if ( a.upVotes < b.upVotes ){
+              return 1;
+            }
+            if ( a.upVotes > b.upVotes ){
+              return -1;
+            }
+            return 0;
+          
+          })
           console.log(posts)
         } else if (sortBy=== "Alphabetical"){
+          posts = posts.sort((a,b)=>{
+            if ( a.title < b.title ){
+              return -1;
+            }
+            if ( a.title > b.title ){
+              return 1;
+            }
+            return 0;
           
+          })
         }
         const tags = [];
         posts.forEach((post)=>{
@@ -58,6 +85,7 @@ const App = () => {
             }
           })
         })
+        console.log(posts)
         setAllPosts(posts);
         setAllTags(tags);
         setRefreshing(false);

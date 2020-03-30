@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import PostView from './PostView';
+import CreatePost from './CreatePost';
 import {Card, Accordion, Button} from 'react-bootstrap';
 import Axios from 'axios';
+import moment from 'moment';
 
 const Post = ({post, i, refresh})=>{
     const [upVoting, setUpVoting] = useState(false);
@@ -68,16 +69,40 @@ const Post = ({post, i, refresh})=>{
                 refresh();
             })
         }
-
     }
-    const enabledStyle = {};
-    const disabledStyle = {opacity: 0.65}
+    const sliceDescription = (body)=>{
+        for(let i=72; i>0; i--){
+            if(body[i] === ' '){
+                const description = body.slice(0, i) + '...'
+                return description
+            }
+        }
+    }
+
+    const enabledStyle = {
+        margin:'5px'
+    };
+    const disabledStyle = {
+        margin:'5px',
+        opacity: 0.65
+    }
     return(
         <Card className='text-left'>
             <Accordion.Toggle as={Card.Header} eventKey={i}>
             <h5>{post.title}</h5>
+            <small style={{ 
+                textOverflow: "ellipsis",
+                overflow: "hidden", 
+                height: "30px",
+                whiteSpace: "nowrap",
+                display:"inline-block",
+                width:"100%"
+
+            }}
+                >{post.body}</small>
+            <br></br>
             <small className="text-muted">UpVotes: {post.upVotes}</small>
-            <small style={{float:'right'}} className="text-muted" >{post.dateCreated}</small>
+            <small style={{float:'right'}} className="text-muted" >{moment(post.dateCreated).fromNow()}</small>
             </Accordion.Toggle>
             <Accordion.Collapse eventKey={i}>
                 <Card>
@@ -87,13 +112,18 @@ const Post = ({post, i, refresh})=>{
                         <Card.Text>
                             <small className='text-muted'>Tags: {post.tags.length ? post.tags.join(', ') : 'none'}</small>
                         </Card.Text>
-                        <Button size="sm" 
-                            style={{float:'right'}} 
-                            disabled={deleting}
-                            onClick={handleRemovePost}
-                            >{deleting ? "Removing...":"Remove Post"}</Button>
+                        <div style={{float:'right', textAlign:'right'}} >
+                            <CreatePost refresh={refresh} post={post} />
+                            <Button 
+                                style={{margin:'5px'}}
+                                size="sm" 
+                                disabled={deleting}
+                                onClick={handleRemovePost}
+                                >{deleting ? "Removing...":"Remove Post"}</Button>
+                        </div>
+                        
                         <Button size="sm"  style={upVoting? disabledStyle: enabledStyle}  onClick={handleUpVote}>Upvote</Button>
-                        <div></div>
+                        <br />
                         <Button size="sm" style={downVoting? disabledStyle: enabledStyle}  onClick={handleDownVote}>Downvote</Button>
                     </Card.Body>
                 </Card>

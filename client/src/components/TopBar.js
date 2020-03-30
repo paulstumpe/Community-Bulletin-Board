@@ -7,12 +7,12 @@ const TopBar = ({filterBy, setFilterBy, allTags, sortBy, setSortBy, refresh})=>{
         // Filter dropdown 
 
     return(<div>
-    <Navbar fixed="top">
-        <Navbar.Brand href="#home">Community Forum</Navbar.Brand>
+    <Navbar bg="light" style={{border: "thin solid blue"}}  fixed="top" expand="md">
+        <Navbar.Brand style={{color: "blue"}} href="#home">Community Forum</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-            <NavDropdown title="Sort By" id="basic-nav-dropdown">
+            <NavDropdown title={"Sort By: " + sortBy}  id="basic-nav-dropdown">
                 <NavDropdown.Item 
                 active={sortBy==='Most Recent'}
                 onClick={()=>{setSortBy('Most Recent')}}>Most Recent</NavDropdown.Item>
@@ -23,7 +23,7 @@ const TopBar = ({filterBy, setFilterBy, allTags, sortBy, setSortBy, refresh})=>{
                 active={sortBy==='Alphabetical'}
                 onClick={()=>{setSortBy('Alphabetical')}}>Alphabetical</NavDropdown.Item>
             </NavDropdown>
-            <NavDropdown title={filterBy==='default'? 'Filter By' : filterBy} id="basic-nav-dropdown">
+            <NavDropdown title={filterBy==='default'? 'Filter By : None' : 'Filter By: ' + filterBy} id="basic-nav-dropdown">
                 <NavDropdown.Item 
                         active={filterBy==='default'}
                         onClick={()=>{setFilterBy('default')}}
@@ -38,6 +38,7 @@ const TopBar = ({filterBy, setFilterBy, allTags, sortBy, setSortBy, refresh})=>{
                 >{tag}</NavDropdown.Item>
                 ))}
             </NavDropdown>
+            <br />
         </Nav>
             <CreatePost refresh={refresh} />
         </Navbar.Collapse>

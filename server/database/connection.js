@@ -44,7 +44,11 @@ const editPost = (submittedPost)=>{
     //updates date updated serverside for consistency and protection
     submittedPost.dateUpdated = Date.now()
     //looks up post by id and rewrites with submittedPost
-    return Post.findOneAndUpdate({_id}, submittedPost)
+    console.log(_id)
+    return Post.findOneAndUpdate({_id}, {$set:submittedPost},{
+        new:true,
+        useFindAndModify:false
+    }).then((x)=>{console.log(x)})
 }
 
 const getAllPosts = ()=>{
