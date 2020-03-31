@@ -31,37 +31,37 @@ const postSchema = new mongoose.Schema({
 const Post = mongoose.model('Post', postSchema);
 
 const savePost = (submittedPost)=>{
-    const post = new Post(submittedPost)
-    return post.save()
-}
+    const post = new Post(submittedPost);
+    return post.save();
+};
 
 const deletePost = (_id)=>{
-    return Post.deleteOne({_id})
-}
+    return Post.deleteOne({_id});
+};
 
 const editPost = (submittedPost)=>{
-    const {_id}=submittedPost
+    const {_id}=submittedPost;
     //updates date updated serverside for consistency and protection
-    submittedPost.dateUpdated = Date.now()
+    submittedPost.dateUpdated = Date.now();
     //looks up post by id and rewrites with submittedPost
-    console.log(_id)
+    console.log(_id);
     return Post.findOneAndUpdate({_id}, {$set:submittedPost},{
         new:true,
         useFindAndModify:false
-    }).then((x)=>{console.log(x)})
-}
+    }).then((x)=>{console.log(x);});
+};
 
 const getAllPosts = ()=>{
-    return Post.find({})
-}
+    return Post.find({});
+};
 
 const upVotePost = (_id)=>{
-    return Post.findOneAndUpdate({_id},{$inc:{upVotes: 1}})
-}
+    return Post.findOneAndUpdate({_id},{$inc:{upVotes: 1}});
+};
 
 const downVotePost = (_id)=>{
-    return Post.findOneAndUpdate({_id},{$inc:{upVotes: -1}})
-}
+    return Post.findOneAndUpdate({_id},{$inc:{upVotes: -1}});
+};
 // savePost({title:'this one has two upvotes', upVotes: 0,body: 'and this  body is super long asl;kdnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnfa see?', tags:["i'm trolling"]})
-getAllPosts()
-module.exports = {savePost, deletePost, editPost, getAllPosts, upVotePost, downVotePost}
+getAllPosts();
+module.exports = {savePost, deletePost, editPost, getAllPosts, upVotePost, downVotePost};
