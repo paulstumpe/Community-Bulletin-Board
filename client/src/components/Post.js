@@ -10,7 +10,7 @@ const Post = ({post, i, refresh})=>{
     const [deleting, setDeleting] = useState(false)
     const handleRemovePost = ()=>{
         setDeleting(true);
-        Axios.delete(`/deletepost/${post._id}`)
+        Axios.delete(`deletepost/${post._id}`)
         .then(()=>{
             setDeleting(false);
             refresh();
@@ -20,23 +20,23 @@ const Post = ({post, i, refresh})=>{
         if( !downVoting && !upVoting){
             setUpVoting(true);
             setDownVoting(false);
-            Axios.patch(`/upvote/${post._id}`)
+            Axios.patch(`upvote/${post._id}`)
             .then(()=>{
                 refresh();
             })
         } else if(upVoting){
             console.log('reached')
             setUpVoting(false);
-            Axios.patch(`/downvote/${post._id}`)
+            Axios.patch(`downvote/${post._id}`)
             .then(()=>{
                 refresh();
             })
         } else if(downVoting){
             setUpVoting(true);
             setDownVoting(false);
-            Axios.patch(`/upvote/${post._id}`)
+            Axios.patch(`upvote/${post._id}`)
             .then(()=>{
-                return Axios.patch(`/upvote/${post._id}`)
+                return Axios.patch(`upvote/${post._id}`)
             })
             .then(()=>{
                 refresh();
@@ -47,23 +47,23 @@ const Post = ({post, i, refresh})=>{
         if(!downVoting && !upVoting){
             setUpVoting(false);
             setDownVoting(true);
-            Axios.patch(`/downvote/${post._id}`)
+            Axios.patch(`downvote/${post._id}`)
             .then(()=>{
                 refresh();
             })
         }else if (downVoting){
             console.log('reached')
             setDownVoting(false);
-            Axios.patch(`/upvote/${post._id}`)
+            Axios.patch(`upvote/${post._id}`)
             .then(()=>{
                 refresh();
             })
         } else if(upVoting){
             setDownVoting(true);
             setUpVoting(false);
-            Axios.patch(`/downVote/${post._id}`)
+            Axios.patch(`downVote/${post._id}`)
             .then(()=>{
-                return Axios.patch(`/downVote/${post._id}`)
+                return Axios.patch(`downVote/${post._id}`)
             })
             .then(()=>{
                 refresh();

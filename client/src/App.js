@@ -39,7 +39,7 @@ const App = () => {
   
   useEffect(()=>{
     
-    axios.get('/allposts')
+    axios.get('allposts')
       .then(({data})=>{
         let posts = data;
         if(sortBy === "Most Recent"){

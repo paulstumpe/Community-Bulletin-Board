@@ -38,11 +38,11 @@ const CreatePost = ({refresh, post})=>{
             post.title=title;
             post.body=body;
             post.tags=(tag.length ? tags.concat(tag) : tags);
-            axios.patch('/editpost', post)
+            axios.patch('editpost', post)
                 .then(refresh)
             setShow(false)
         } else {
-            axios.post('/createpost', {
+            axios.post('createpost', {
                 title,
                 body,
                 tags : (tag.length ? tags.concat(tag) : tags)
