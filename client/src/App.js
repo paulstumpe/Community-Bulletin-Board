@@ -8,6 +8,7 @@ import CreatePost from './components/CreatePost';
 import TopBar from './components/TopBar';
 import axios from 'axios';
 
+//will not be adding context
 const App = () => {
   //array of all posts from server
   const [allPosts, setAllPosts] = useState([
