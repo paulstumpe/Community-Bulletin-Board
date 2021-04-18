@@ -70,15 +70,6 @@ const Post = ({post, i, refresh})=>{
             })
         }
     }
-    const sliceDescription = (body)=>{
-        for(let i=72; i>0; i--){
-            if(body[i] === ' '){
-                const description = body.slice(0, i) + '...'
-                return description
-            }
-        }
-    }
-
     const enabledStyle = {
         margin:'5px'
     };
@@ -100,7 +91,7 @@ const Post = ({post, i, refresh})=>{
 
             }}
                 >{post.body}</small>
-            <br></br>
+            <br/>
             <small className="text-muted">UpVotes: {post.upVotes}</small>
             <small style={{float:'right'}} className="text-muted" >{moment(post.dateCreated).fromNow()}</small>
             </Accordion.Toggle>

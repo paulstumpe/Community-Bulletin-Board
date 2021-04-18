@@ -4,12 +4,21 @@ import CreatePost from './CreatePost';
 const TopBar = ({filterBy, setFilterBy, allTags, sortBy, setSortBy, refresh})=>{
     
         //  Sorting dropdown
-        // Filter dropdown 
+        // Filter dropdown
+    const [expanded, setExpanded] = useState(false);
+    const paddingTop = {paddingTop: '147px'}
+    const onNavBarClick = ()=>setExpanded(!expanded);
+    const onChildSelect = (eventKey, e)=>{
+        console.log(e);
+        debugger;
+    }
 
-    return(<div>
-    <Navbar bg="light" style={{border: "thin solid blue"}}  fixed="top" expand="md">
+    return(<div style={{ ...expanded && paddingTop}}>
+    <Navbar bg="light" expanded={expanded} onToggle={onChildSelect} style={{border: "thin solid blue"}}  fixed="top" expand="md" onselect={()=>{
+        console.log('on select')
+    }}>
         <Navbar.Brand style={{color: "blue"}} href="#home">Community Forum</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle onClick={onNavBarClick} aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
             <NavDropdown title={"Sort By: " + sortBy}  id="basic-nav-dropdown">
@@ -40,7 +49,7 @@ const TopBar = ({filterBy, setFilterBy, allTags, sortBy, setSortBy, refresh})=>{
             </NavDropdown>
             <br />
         </Nav>
-            <CreatePost refresh={refresh} />
+            <CreatePost refresh={refresh}  setExpanded ={setExpanded}/>
         </Navbar.Collapse>
     </Navbar>
     </div>)

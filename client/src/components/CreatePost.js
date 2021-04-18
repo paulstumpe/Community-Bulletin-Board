@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {Button, Modal, Form} from 'react-bootstrap';
 import axios from 'axios';
-const CreatePost = ({refresh, post})=>{
+const CreatePost = ({refresh, post, setExpanded})=>{
     const editing = post;
     if (!editing){
         post = {
@@ -17,6 +17,9 @@ const CreatePost = ({refresh, post})=>{
     const [title, setTitle] = useState(post.title);
     const [tags, setTags] = useState(post.tags);
 
+    if(show){
+        setExpanded(false);
+    }
     const clearAllFields = ()=>{
         setTags([]);
         setTitle('');
