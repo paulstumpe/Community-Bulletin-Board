@@ -17,7 +17,7 @@ const CreatePost = ({refresh, post, setExpanded})=>{
     const [title, setTitle] = useState(post.title);
     const [tags, setTags] = useState(post.tags);
 
-    if(show){
+    if(show && setExpanded){
         setExpanded(false);
     }
     const clearAllFields = ()=>{

@@ -1,6 +1,6 @@
 const express = require('express')
 const api = express.Router();
-const {savePost, deletePost, editPost, getAllPosts, upVotePost, downVotePost} = require('./database/connection')
+const {savePost, deletePost, editPost, getAllPosts, upVotePost, downVotePost, getAllTags} = require('./database/connection')
 
 api.get('/board', (req,res)=>{
     res.send('board')
@@ -9,6 +9,10 @@ api.get('/board', (req,res)=>{
 api.get('/allposts', (req,res)=>{
     getAllPosts()
     .then(allPosts=>res.send(allPosts))
+})
+api.get('/alltags', (req,res)=>{
+    getAllPosts()
+        .then(allPosts=>res.send(allPosts))
 })
 api.post('/createpost', (req,res)=>{
     // console.log(req.body)

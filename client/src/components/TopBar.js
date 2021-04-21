@@ -6,8 +6,25 @@ const TopBar = ({filterBy, setFilterBy, allTags, sortBy, setSortBy, refresh})=>{
         //  Sorting dropdown
         // Filter dropdown
     const [expanded, setExpanded] = useState(false);
-    const paddingTop = {paddingTop: '147px'}
-    const onNavBarClick = ()=>setExpanded(!expanded);
+    const paddingTop = {paddingTop: '140px'}
+    const onNavBarClick = ()=> {
+
+        //another aditional conditional, but it doesn't seem to be having an effect or neccesarry
+        // && !(window.scrollY+scrollingAmount > getMaximumScrollInPixels())
+        const scrollingAmount = 140;
+        if(window.scrollY!==0){
+            console.log('true')
+            window.scrollBy({
+                top: expanded? scrollingAmount: -scrollingAmount,
+                behavior:'auto'
+            });
+        } else {
+            //if it wasn't worth scrolling, make sure i dont scroll on the other toggle either.
+
+        }
+        setExpanded(!expanded)
+
+    };
     const onChildSelect = (eventKey, e)=>{
         console.log(e);
         debugger;
@@ -55,3 +72,8 @@ const TopBar = ({filterBy, setFilterBy, allTags, sortBy, setSortBy, refresh})=>{
     </div>)
 }
 export default TopBar;
+
+function getMaximumScrollInPixels (){
+    return  Math.max( document.body.scrollHeight, document.body.offsetHeight,
+        document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight );
+}

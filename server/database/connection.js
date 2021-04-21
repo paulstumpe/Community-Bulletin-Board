@@ -54,6 +54,9 @@ const editPost = (submittedPost)=>{
 const getAllPosts = ()=>{
     return Post.find({});
 };
+const getAllTags = ()=>{
+    return  Post.find(()=>{}).select('tags');
+}
 
 const upVotePost = (_id)=>{
     return Post.findOneAndUpdate({_id},{$inc:{upVotes: 1}});
@@ -62,6 +65,8 @@ const upVotePost = (_id)=>{
 const downVotePost = (_id)=>{
     return Post.findOneAndUpdate({_id},{$inc:{upVotes: -1}});
 };
+
+
 // savePost({title:'this one has two upvotes', upVotes: 0,body: 'and this  body is super long asl;kdnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnfa see?', tags:["i'm trolling"]})
 getAllPosts();
-module.exports = {savePost, deletePost, editPost, getAllPosts, upVotePost, downVotePost};
+module.exports = {savePost, deletePost, editPost, getAllPosts, upVotePost, downVotePost, getAllTags};
